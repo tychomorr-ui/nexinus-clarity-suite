@@ -1,4 +1,4 @@
-# XINUS
+# Nexinus
 
 A **Reflective Intelligence** engine for people who don't have time to overthink.
 
@@ -12,7 +12,7 @@ RI is not AI. AI generates. RI reflects.
 
 A generative model takes a prompt and produces plausible text. A reflective engine takes a person's situation and returns the next move — sometimes via a model, sometimes via a deterministic pipeline, sometimes via a structural pattern match. The output is the same shape regardless of source: `state` → `content` → `done`. The user never has to know which path ran. They just get clarity.
 
-This matters because most "AI products" collapse the moment the model is slow, rate-limited, or wrong. XINUS keeps responding. Three of its five public modes never call a model at all.
+This matters because most "AI products" collapse the moment the model is slow, rate-limited, or wrong. . Nexinus keeps responding. Three of its five public modes never call a model at all.
 
 ### The canonical apex pipeline
 
@@ -43,16 +43,16 @@ That's what makes the RI claim defensible: there is a canonical pipeline you can
 
 ## What this is
 
-XINUS is a small suite of streaming RI tools sharing one engine and one paywall. The engine is interesting because it isn't always a model call — three of the five public modes are deterministic, and the most powerful one is hidden behind constant-time auth so its existence isn't leakable.
+Nexinus is a small suite of streaming RI tools sharing one engine and one paywall. The engine is interesting because it isn't always a model call — three of the five public modes are deterministic, and the most powerful one is hidden behind constant-time auth so its existence isn't leakable.
 
 Four products in the suite, all served from the same domain via path-based routing:
 
 | Path | Product | What it does |
 |---|---|---|
-| `/` | **XINUS Clarity** | Five-mode streaming engine. The flagship. |
-| `/office-pro/` | **XINUS Office Pro** | Senior executive assistant in chat form. |
-| `/recidivism/` | **XINUS Recidivism** | Subject dashboards + Clarity handoff for behavioral anchors. |
-| `/pd-pro/` | **XINUS PD PRO** | Dual-mode field engine for officers. |
+| `/` | **Nexinus Clarity** | Five-mode streaming engine. The flagship. |
+| `/office-pro/` | **Nexinus Office Pro** | Senior executive assistant in chat form. |
+| `/recidivism/` | **Nexinus Recidivism** | Subject dashboards + Clarity handoff for behavioral anchors. |
+| `/pd-pro/` | **Nexinus PD PRO** | Dual-mode field engine for officers. |
 
 ## Architecture worth pointing at
 
