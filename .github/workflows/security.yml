@@ -30,6 +30,9 @@ jobs:
   dependency-audit:
     name: Dependency audit
     runs-on: ubuntu-latest
+    env:
+      VITE_APP_TITLE: XinUS Clarity Suite
+      JWT_SECRET: CI_TEST_SIGNING_MATERIAL_2026_NOT_PRODUCTION
     steps:
       - name: Check out source
         uses: actions/checkout@v4
