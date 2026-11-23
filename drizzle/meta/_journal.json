@@ -5,8 +5,113 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1777561165674,
-      "tag": "0000_lyrical_omega_flight",
+      "when": 1786511491618,
+      "tag": "0000_nifty_slayback",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1786512678675,
+      "tag": "0001_tough_nocturne",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1786512785876,
+      "tag": "0002_naive_brother_voodoo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1786513122512,
+      "tag": "0003_keen_zarek",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1786562052957,
+      "tag": "0004_youthful_steve_rogers",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1786562828541,
+      "tag": "0005_stale_mesmero",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1786563907577,
+      "tag": "0006_stormy_darkstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1786565446207,
+      "tag": "0007_useful_nekra",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1786571850940,
+      "tag": "0008_lovely_may_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1786592273633,
+      "tag": "0009_graceful_alice",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1786592740000,
+      "tag": "0010_calm_pam_titles",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1792314821209,
+      "tag": "0011_calm_reavers",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1792324542755,
+      "tag": "0012_numerous_namor",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "5",
+      "when": 1792325056109,
+      "tag": "0013_equal_forgotten_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "5",
+      "when": 1792326199962,
+      "tag": "0014_panoramic_red_skull",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1793490925713,
+      "tag": "0015_kind_jackpot",
       "breakpoints": true
     }
   ]

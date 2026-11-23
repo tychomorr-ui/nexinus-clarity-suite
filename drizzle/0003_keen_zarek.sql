@@ -1,0 +1,2 @@
+ALTER TABLE `credit_ledger` DROP INDEX `credit_ledger_idempotencyKey_unique`;--> statement-breakpoint
+ALTER TABLE `credit_ledger` ADD CONSTRAINT `credit_ledger_user_idempotency_unique` UNIQUE(`userId`,`idempotencyKey`);

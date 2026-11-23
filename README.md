@@ -1,96 +1,55 @@
-# Nexinus
+# XinUS Clarity Suite
 
-A **Reflective Intelligence** engine for people who don't have time to overthink.
+XinUS Clarity Suite is a privacy-first, multi-app decision-support workspace for evidence analysis, learning, casework, recovery, operations, situational reporting, and personal action management.
 
-Live at **[nexinus.net](https://www.nexinus.net)**.
+The suite is built as eight standalone experiences powered by one shared intelligence boundary:
 
-Built end-to-end on an iPhone 16 Pro Max. No laptop, no desktop, no IDE on a real keyboard — every line, every deploy, every Stripe webhook from a phone. By a carpenter, not a CS grad.
+- **Clarity** — deterministic proposition and decision workflows.
+- **GED Tutor** — adaptive, encouraging study support.
+- **Hidden Gems** — image-led appraisal and provenance review.
+- **PD Pro** — public-defense case organization and review.
+- **Recovery** — structured recovery and reentry support.
+- **Task Force Pro** — operational planning and supervision workflows.
+- **SitRep** — evidence-bound situational assessment and comparison.
+- **PAM** — Personal Action Manager and cross-app briefing surface.
 
-## Reflective Intelligence (RI)
+## Production status
 
-RI is not AI. AI generates. RI reflects.
+The production runtime is the Manus WebDev project `CERUhtwoxiEDvVacJwQnY6`, deployed at [exonissuite-ceruhtwo.manus.space](https://exonissuite-ceruhtwo.manus.space). This repository is the canonical source for that Manus deployment. See [SOURCE-OF-TRUTH.md](SOURCE-OF-TRUTH.md) for provenance and the boundaries between this repository, legacy Replit exports, and the separate Pharo-Lapse protocol repository.
 
-A generative model takes a prompt and produces plausible text. A reflective engine takes a person's situation and returns the next move — sometimes via a model, sometimes via a deterministic pipeline, sometimes via a structural pattern match. The output is the same shape regardless of source: `state` → `content` → `done`. The user never has to know which path ran. They just get clarity.
+## Architecture
 
-This matters because most "AI products" collapse the moment the model is slow, rate-limited, or wrong. . Nexinus keeps responding. Three of its five public modes never call a model at all.
+The application uses React, TypeScript, Tailwind, Express, tRPC, Drizzle, and MySQL/TiDB-compatible persistence. The server owns authentication, authorization, provider selection, persistence, cryptographic verification, audit logging, and restricted-data policy. The browser never receives server-side provider credentials or signing keys.
 
-### The canonical apex pipeline
+The Clarity core contains a deterministic state machine and Truth Ledger. Deterministic transitions remain authoritative. Model-assisted output may explain, summarize, retrieve, or suggest; it may not silently change a state transition, verify evidence, create a receipt, or approve a consequential action.
 
-Every RI surface in this suite implements the same canonical loop:
+SitRep preserves the distinction between evidence status and model confidence. Source documents and claims remain reviewable, simulation branches cannot promote unverified material, and consequential actions remain human-in-the-loop.
 
+## Local-first intelligence
+
+XinUS supports a server-side Ollama provider for private workflows through an OpenAI-compatible chat endpoint. Provider selection is controlled by `XINUS_AI_PROVIDER`; restricted workflows must use the local provider. The current provider abstraction is the foundation for the planned primary/fallback model router and Nomic Embed semantic index. See [docs/integrations/ollama.md](docs/integrations/ollama.md).
+
+## Cryptographic verification
+
+Clarity exports include a canonical envelope hash and server signature. Users can verify exports at `/verify` or with the root CLI utility:
+
+```bash
+node verify-receipt.mjs /path/to/export.json
 ```
-DETECT → REFLECT → CLARIFY → DIRECT → EXECUTE → REPEAT
+
+Pharo-Lapse support is currently bounded to local signed-envelope construction and verification tests. It is not a claim of live mesh routing or Valkyrie connectivity. See [docs/integrations/pharo-lapse.md](docs/integrations/pharo-lapse.md).
+
+## Development
+
+```bash
+pnpm install --frozen-lockfile
+pnpm check
+pnpm test
+pnpm build
 ```
 
-Concretely:
+Do not commit `.env` files, private keys, signing material, credentials, database URLs, or provider tokens. Use the deployment secret manager and consult [README.production.md](README.production.md) and [SECURITY.md](SECURITY.md).
 
-- **DETECT** — apply per-event deltas to the user's state machine (risk score, clarity, streak, mode). Deterministic. No interpretation.
-- **REFLECT** — derive metrics from the recent event window (trigger frequency, momentum, inactivity, non-execution count). Pure functions, no I/O.
-- **CLARIFY** — collapse the entire state-and-metric surface into exactly **one reflection + one next action**. Priority-ordered ladder, always returns; an emergency state locks the output to the canonical grounding pair, no exceptions.
-- **DIRECT** — emit the directive. Voice/UI consume it; they do not generate independently.
-- **EXECUTE** — wait for the user's response. A `task_complete` event resets non-execution bookkeeping. A missed directive starts an escalation timer that walks the user down a deterministic ladder of physical, micro, unavoidable actions.
-- **REPEAT** — the loop is the only thing that mutates state. There is no second writer. There is no other code path.
+## License
 
-This is the **canonical apex pipeline** — same shape in every surface, instantiated three times in the codebase:
-
-- `artifacts/xinus-recidivism/src/lib/pipeline.ts` — the reference implementation. 358 lines of pure deterministic logic. Zero model calls.
-- `artifacts/xinus-pd-pro/src/lib/engine.ts` — the dual-mode (client / public defender) variant. Same `processEvent` discipline: one mutator, no side effects.
-- `artifacts/api-server/src/routes/xinus/index.ts` (Transcend mode) — the cross-domain instance: `sanitize → decompose → extractPattern → resolve → integrametric → mapIdentity → synthesizeAction → project`.
-
-When the model layer is up, Core/Expand/Ascend/Warrior modes wrap their model output in the same SSE protocol the deterministic pipelines emit, so the client renderer can't tell the difference. When the model layer is down, the deterministic pipelines still run. The product never goes dark.
-
-That's what makes the RI claim defensible: there is a canonical pipeline you can run with the model unplugged.
-
-## What this is
-
-Nexinus is a small suite of streaming RI tools sharing one engine and one paywall. The engine is interesting because it isn't always a model call — three of the five public modes are deterministic, and the most powerful one is hidden behind constant-time auth so its existence isn't leakable.
-
-Four products in the suite, all served from the same domain via path-based routing:
-
-| Path | Product | What it does |
-|---|---|---|
-| `/` | **Nexinus Clarity** | Five-mode streaming engine. The flagship. |
-| `/office-pro/` | **Nexinus Office Pro** | Senior executive assistant in chat form. |
-| `/recidivism/` | **Nexinus Recidivism** | Subject dashboards + Clarity handoff for behavioral anchors. |
-| `/pd-pro/` | **Nexinus PD PRO** | Dual-mode field engine for officers. |
-
-## Architecture worth pointing at
-
-This is a pnpm monorepo. Each product is a separate Vite app in `artifacts/`, plus one Express API server. The platform routes `/api/*` to the API server and each `/<slug>/*` to its app. All five processes share one Postgres and one OpenAI key.
-
-A few decisions I'd defend:
-
-**SSE protocol over WebSockets.** Every streaming endpoint speaks the same three-event SSE wire format: `state` → `content`* → `done`. Clients don't care whether the response came from a model call or a deterministic pipeline — the protocol is identical. This is what lets Transcend mode (no model call, returns instantly) and Core mode (model streaming) share a single React renderer with zero branching. The wire format is the contract; the engine behind it is interchangeable.
-
-**Deterministic mode behind the same protocol.** `transcend` is a hand-written pipeline: `sanitize → decompose → extractPattern → resolve → integrametric → mapIdentity → synthesizeAction → project`. It returns in milliseconds with no model cost. This is the part most products can't do — they fall over the moment the model is slow or down. XINUS keeps responding because the engine isn't the model.
-
-**Constant-time auth on the privileged mode.** The `omni` mode (owner-only) is gated by `isOwner()` in `artifacts/api-server/src/lib/security.ts`. Wrong key, missing key, or any non-owner request gets an indistinguishable `404 Not Found` — same status, same body, same headers as a real 404 from the router. The mode's existence doesn't leak from the API surface. Frontend unlock is intentionally clunky (7 quick taps on the sigil) so it can't be discovered casually.
-
-**One quota system, two products, zero duplication.** Free users get 5 Expand runs/week and 3 Office Pro generations/week. Both are gated by the same `consumeFreeQuota(userId, mode)` function backed by an atomic upsert with a guard clause — race-safe under concurrent requests. The 402 response carries the full quota snapshot in the JSON body and as `X-Free-Quota-*` HTTP headers, so SSE clients (which can't read a JSON body before the stream starts) can update UI from headers alone.
-
-**Stripe webhook is the only writer of subscription state.** The checkout endpoint refuses to start if `STRIPE_WEBHOOK_SECRET` isn't set — fail-safe. No optimistic flips on checkout completion in the UI; the source of truth is the webhook. Frontend polls `/billing/me` after the redirect to pick up the change.
-
-**Cross-app checkout return path with allowlist.** Office Pro's checkout redirects back to `/office-pro/?billing=success` instead of the account page, so the user lands where they were. The `returnPath` is sanitized server-side against a fixed allowlist — clients can't aim Stripe at an arbitrary domain.
-
-## Stack
-
-- **Frontend:** React + Vite + Tailwind + wouter (intentionally not React Router — wouter is ~1.5KB)
-- **Backend:** Node + Express + TypeScript
-- **DB:** Postgres + Drizzle ORM
-- **Streaming:** SSE (no WebSockets — see above)
-- **Model layer:** OpenAI streaming via the Replit AI Integrations proxy (one of several engine sources behind the RI protocol)
-- **Payments:** Stripe Checkout + Customer Portal + signed webhooks
-- **Hosting:** Replit Deployments with custom domain + auto-issued TLS
-
-## Code worth reading
-
-- `artifacts/api-server/src/routes/xinus/index.ts` — mode router, SSE protocol, Light Warrior + Transcend deterministic paths
-- `artifacts/api-server/src/lib/security.ts` — constant-time owner check, mode sanitization
-- `artifacts/api-server/src/lib/quota.ts` — atomic free-quota counter, ISO-week boundaries
-- `artifacts/api-server/src/routes/billing.ts` — Stripe Checkout, signed webhook, customer portal, returnPath allowlist
-- `artifacts/xinus/src/pages/Home.tsx` — the chat UI; mode selector, Light Warrior handoff, owner-key unlock
-- `artifacts/xinus-office-pro/src/pages/Office.tsx` — quota badge, optimistic message rollback on 402, post-checkout polling
-
-## Built by
-
-A carpenter. Solo, end to end, on an iPhone 16 Pro Max. Live at [nexinus.net](https://www.nexinus.net).
+The application is released under the MIT License. See [LICENSE](LICENSE).

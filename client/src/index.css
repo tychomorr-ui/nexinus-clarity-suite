@@ -4,6 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -119,6 +121,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 18% -10%, rgba(139,92,246,.16), transparent 31rem), radial-gradient(circle at 95% 15%, rgba(251,191,36,.08), transparent 22rem);
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -131,7 +134,21 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
+  :where(a, button, input, textarea, select, [role="button"]):focus-visible {
+    outline: 2px solid oklch(0.78 0.17 285);
+    outline-offset: 3px;
+  }
 }
+
+.font-display { font-family: "Cormorant Garamond", Georgia, serif; }
+.surface { border: 1px solid rgba(255,255,255,.09); border-radius: 1.25rem; background: linear-gradient(145deg, rgba(25,27,40,.9), rgba(14,15,23,.82)); box-shadow: 0 20px 60px rgba(0,0,0,.22); }
+.surface-soft { border: 1px solid rgba(255,255,255,.07); border-radius: 1.25rem; background: rgba(255,255,255,.025); }
+.result-card { border: 1px solid rgba(167,139,250,.2); border-radius: 1.25rem; background: linear-gradient(135deg, rgba(76,29,149,.16), rgba(15,23,42,.82)); padding: 1.5rem; }
+.micro-label { font-size: .66rem; line-height: 1rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgb(148 163 184); }
+.mode-chip { min-height: 2.5rem; border: 1px solid rgba(255,255,255,.1); border-radius: 999px; padding: .45rem .75rem; color: rgb(148 163 184); font-size: .72rem; line-height: 1rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: transform .16s cubic-bezier(.23,1,.32,1), background .16s, border-color .16s; }
+.mode-chip:hover { border-color: rgba(196,181,253,.4); color: rgb(237 233 254); } .mode-chip:active { transform: scale(.97); } .mode-chip-active { border-color: rgb(167 139 250); background: rgba(139,92,246,.18); color: rgb(237 233 254); }
+@media (prefers-reduced-motion: no-preference) { .surface, .surface-soft, .result-card { animation: rise .28s cubic-bezier(.23,1,.32,1) both; } @keyframes rise { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 
 @layer components {
   /**

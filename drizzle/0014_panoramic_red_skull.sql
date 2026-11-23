@@ -1,0 +1,1 @@
+ALTER TABLE `clarity_truth_ledger` ADD CONSTRAINT `clarity_truth_ledger_session_hash_unique` UNIQUE(`sessionId`,`hash`);

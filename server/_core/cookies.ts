@@ -24,31 +24,29 @@ function isSecureRequest(req: Request) {
 export function getSessionCookieOptions(
   req: Request
 ): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure"> {
-  const hostname = (req.hostname ?? "").toLowerCase();
-  const shouldSetCanonicalDomain =
-    hostname === "nexinus.net" || hostname === "www.nexinus.net";
+  // const hostname = req.hostname;
+  // const shouldSetDomain =
+  //   hostname &&
+  //   !LOCAL_HOSTS.has(hostname) &&
+  //   !isIpAddress(hostname) &&
+  //   hostname !== "127.0.0.1" &&
+  //   hostname !== "::1";
 
-  const shouldSetDynamicDomain =
-    hostname &&
-    !LOCAL_HOSTS.has(hostname) &&
-    !isIpAddress(hostname) &&
-    hostname !== "127.0.0.1" &&
-    hostname !== "::1" &&
-    !hostname.endsWith(".manus.computer");
-
-  const domain = shouldSetCanonicalDomain
-    ? ".nexinus.net"
-    : shouldSetDynamicDomain && !hostname.startsWith(".")
-      ? `.${hostname}`
-      : shouldSetDynamicDomain
-        ? hostname
-        : undefined;
+  // const domain =
+  //   shouldSetDomain && !hostname.startsWith(".")
+  //     ? `.${hostname}`
+  //     : shouldSetDomain
+  //       ? hostname
+  //       : undefined;
 
   return {
-    domain,
     httpOnly: true,
     path: "/",
-    sameSite: "none",
+    // XinUS private OAuth is same-site: the authorization redirect returns to
+    // this application, not to a different identity-provider origin. Lax is
+    // accepted by browsers even when a reverse proxy obscures the upstream
+    // HTTPS scheme; SameSite=None would be rejected unless Secure is true.
+    sameSite: "lax",
     secure: isSecureRequest(req),
   };
 }

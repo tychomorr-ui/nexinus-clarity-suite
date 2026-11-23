@@ -19,18 +19,33 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { getLoginUrl } from "@/const";
+import { startLogin } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { BrainCircuit, Command, Gem, GraduationCap, LayoutDashboard, LogOut, PanelLeft, Radio, Scale, ShieldAlert, Sparkles, Users, Waves } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Page 1", path: "/" },
-  { icon: Users, label: "Page 2", path: "/some-path" },
-];
+const productItems = {
+  clarity: [{ icon: BrainCircuit, label: "Clarity", path: "/clarity" }],
+  ged_tutor: [{ icon: GraduationCap, label: "GED Tutor", path: "/ged-tutor" }],
+  hidden_gems: [{ icon: Gem, label: "Hidden Gems", path: "/hidden-gems" }],
+  pd_pro: [{ icon: Scale, label: "PD Pro", path: "/pd-pro" }],
+  recovery: [{ icon: ShieldAlert, label: "Recovery", path: "/recidivism" }],
+  task_force_pro: [{ icon: ShieldAlert, label: "Task Force Pro", path: "/task-force-pro" }],
+  supervisionTools: [
+    { icon: Sparkles, label: "Triggers", path: "/recidivism/triggers" },
+    { icon: LayoutDashboard, label: "Patterns", path: "/recidivism/patterns" },
+    { icon: Users, label: "Obligations", path: "/recidivism/obligations" },
+    { icon: LayoutDashboard, label: "Geofences", path: "/recidivism/geofences" },
+    { icon: Users, label: "Contacts", path: "/recidivism/contacts" },
+    { icon: Command, label: "Console", path: "/recidivism/console" },
+  ],
+  sitrep: [{ icon: Radio, label: "SitRep", path: "/sitrep" }],
+  pam: [{ icon: Waves, label: "PAM", path: "/pam" }],
+};
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
 const DEFAULT_WIDTH = 280;
@@ -57,6 +72,7 @@ export default function DashboardLayout({
   }
 
   if (!user) {
+    const retryingLogin = new URLSearchParams(window.location.search).get("auth") === "retry";
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center gap-8 p-8 max-w-md w-full">
@@ -65,13 +81,11 @@ export default function DashboardLayout({
               Sign in to continue
             </h1>
             <p className="text-sm text-muted-foreground text-center max-w-sm">
-              Access to this dashboard requires authentication. Continue to launch the login flow.
+              {retryingLogin ? "Your sign-in session expired or was interrupted. Start a fresh sign-in below." : "Access to this dashboard requires authentication. Continue to launch the login flow."}
             </p>
           </div>
           <Button
-            onClick={() => {
-              window.location.href = getLoginUrl();
-            }}
+            onClick={() => startLogin()}
             size="lg"
             className="w-full shadow-lg hover:shadow-xl transition-all"
           >
@@ -90,6 +104,11 @@ export default function DashboardLayout({
         } as CSSProperties
       }
     >
+      {import.meta.env.VITE_XINUS_BETA_AUTH_BYPASS !== "false" ? (
+        <div className="fixed bottom-3 right-3 z-50 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-medium text-amber-200 shadow-lg">
+          Beta access — authentication temporarily bypassed
+        </div>
+      ) : null}
       <DashboardLayoutContent setSidebarWidth={setSidebarWidth}>
         {children}
       </DashboardLayoutContent>
@@ -108,10 +127,27 @@ function DashboardLayoutContent({
 }: DashboardLayoutContentProps) {
   const { user, logout } = useAuth();
   const [location, setLocation] = useLocation();
+  const access = trpc.products.access.useQuery();
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const entitledProducts = access.data?.products ?? [];
+  const menuItems = [
+    { icon: LayoutDashboard, label: "Private dashboard", path: "/dashboard" },
+    { icon: LayoutDashboard, label: "My XinUS Apps", path: "/products" },
+    ...(entitledProducts.includes("clarity") ? productItems.clarity : []),
+    ...(entitledProducts.includes("ged_tutor") ? productItems.ged_tutor : []),
+    ...(entitledProducts.includes("hidden_gems") ? productItems.hidden_gems : []),
+    ...(entitledProducts.includes("pd_pro") ? productItems.pd_pro : []),
+    ...(entitledProducts.includes("recovery") ? productItems.recovery : []),
+    ...(entitledProducts.includes("task_force_pro") ? productItems.task_force_pro : []),
+    ...(entitledProducts.includes("recovery") || entitledProducts.includes("task_force_pro") ? productItems.supervisionTools : []),
+    ...(entitledProducts.includes("sitrep") ? productItems.sitrep : []),
+    ...(entitledProducts.includes("pam") ? productItems.pam : []),
+    { icon: Users, label: "Account", path: "/account" },
+    ...(user?.role === "admin" ? [{ icon: Command, label: "Owner", path: "/admin" }] : []),
+  ];
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
 
@@ -170,8 +206,8 @@ function DashboardLayoutContent({
               </button>
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold tracking-tight truncate">
-                    Navigation
+                    <span className="font-semibold tracking-tight truncate text-stone-100">
+                      XinUS
                   </span>
                 </div>
               ) : null}
@@ -250,7 +286,7 @@ function DashboardLayoutContent({
               <div className="flex items-center gap-3">
                 <div className="flex flex-col gap-1">
                   <span className="tracking-tight text-foreground">
-                    {activeMenuItem?.label ?? "Menu"}
+                      {activeMenuItem?.label ?? "XinUS"}
                   </span>
                 </div>
               </div>

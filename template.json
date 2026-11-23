@@ -1,0 +1,14 @@
+{
+  "id": "web-db-user",
+  "name": "XinUS Clarity Suite",
+  "description": "XinUS reflective intelligence application with database, server, and user capabilities.",
+  "capabilities": [
+    "server",
+    "db",
+    "user"
+  ],
+  "projectBrand": {
+    "name": "XinUS Clarity Suite",
+    "packageName": "xinus-clarity-suite"
+  }
+}

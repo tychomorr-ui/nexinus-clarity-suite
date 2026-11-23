@@ -89,4 +89,28 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
+/** Temporary beta identity; disable with XINUS_BETA_AUTH_BYPASS=false before public launch. */
+export async function getOrCreateBetaUser() {
+  const db = await getDb();
+  if (!db) throw new Error("Beta identity database is unavailable.");
+  const openId = "xinus-beta-test";
+  const existing = await getUserByOpenId(openId);
+  if (existing) return existing;
+  try {
+    await db.insert(users).values({
+      openId,
+      name: "XinUS Beta Tester",
+      email: "beta@xinus.local",
+      loginMethod: "beta-bypass",
+      role: "admin",
+      lastSignedIn: new Date(),
+    });
+  } catch {
+    // Another request may have created the singleton concurrently.
+  }
+  const created = await getUserByOpenId(openId);
+  if (!created) throw new Error("Beta identity could not be created.");
+  return created;
+}
+
 // TODO: add feature queries here as your schema grows.

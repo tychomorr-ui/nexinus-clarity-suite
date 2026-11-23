@@ -1,29 +1,162 @@
 # Project TODO
 
-- [x] Build the dark sovereign landing page for NEXINUS.net with an asymmetric layout, Omni Sphere hero, seven-bridge navigation, and a CTA into the clarity engine.
-- [x] Implement the sovereign truth engine UI with SSE-powered clarity queries, real-time bridge field display, IDENTI-SIGNAL indicator, and synthesysaction output panel.
-- [x] Enforce owner-gated Omni and IntelliGenerate access using the exact `XINUS_OWNER_KEY` header and explicit admin role checks in protected procedures.
-- [x] Add exact health endpoint `/api/health` returning runtime status, database connectivity, and engine version.
-- [x] Add PostgreSQL-backed persistence for truth sessions and mirror events with startup migration and in-memory fallback when the database is unavailable.
-- [x] Implement production hardening for `NEXINUS.net`, including strict domain-aware CORS, rate limiting, secure headers, input validation, graceful DB failover, and structured error logging.
-- [x] Integrate Stripe subscription checkout, billing portal, secure webhooks, and tier/quota enforcement using environment-based secrets only.
-- [x] Implement the mirror registry `POST /mirror/seed` endpoint with idempotent `?append=1` mode, NFKC-normalized deduplication, and owner-signed `official.added` event chaining inside locked transactions.
-- [x] Add the mirror ledger verification endpoint at `/mirror/ledger/verify` returning verification status and total event count.
-- [x] Build the mirror registry frontend at `/mirror/registry` showing tier headings 100, 90, 80, 70, and 40 with all rows visible and no UI errors.
-- [x] Ensure the seven bridge names appear exactly as: Transcend, Alchemy, Respond, Light Warrior, Archangel, VOCAI, IntelliGenerate.
-- [x] Keep all sensitive values out of code and sourced from environment configuration only.
-- [x] Write and run Vitest coverage for backend access control, mirror seeding, ledger verification, health checks, and Stripe-related server logic.
-- [x] Verify the development environment status, update documentation, and prepare the project for final checkpoint and delivery.
-- [x] Wire the backend to the confirmed environment variable names `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, and `XINUS_OWNER_KEY` without exposing secret values in code.
-- [x] Preserve compatibility with the existing deployment secret/config surface shown in the provided project environment screenshot.
-- [x] Express an always-alive, powerful canonical presence for NEXINUS.net through resilient architecture and sovereign frontend behavior rather than obscurity-based security.
-- [x] Evaluate whether Stan Store Creator Pro should remain a secondary commerce surface that feeds into the canonical NEXINUS.net Stripe flow without displacing Manus-hosted identity and control.
-- [x] Add a free-trial path to the NEXINUS.net Stripe subscription model and reflect it cleanly in plan metadata, quota logic, and checkout behavior.
-- [x] Integrate a predictive pre-input pressure layer into the NEXINUS clarity engine so behavior can influence interpretation before the final response stage.
-- [x] Add trajectory-aware continuity logic using IDENTI-SIGNAL and trace preservation so the system reconstructs progression rather than reacting to isolated slices.
-- [x] Refine resistance detection and escalation behavior so state progression is stable under repetition and only de-escalates on strong confusion signals.
-- [x] Reflect the canonical pipeline and alive-system framing from the provided Nexus OS references in the frontend presentation and OmniAPI interaction model.
-- [x] Fix the sovereign clarity engine bugs affecting the live canonical query experience.
-- [x] Fix the sign-in and runtime-routing bugs so authentication stays inside the intended NEXINUS.net app flow instead of falling into terminal or broken runtime behavior.
-- [x] Update `server/_core/sdk.ts` so OAuth token exchange derives the correct callback redirect URI from the encoded login state and stays consistent with the frontend and callback handlers.
-- [x] Add automated coverage for the login-state round trip so state encoding, backend decoding, and OAuth token exchange all agree on the exact callback redirect URI.
+- [x] Safely extract the supplied `fullproject.tar.gz` archive and catalog every original source file, asset, module, page, route, form, data model, and configuration artifact.
+- [x] Document the original XinUS naming conventions, module boundaries, routes, workflows, and business rules before implementation begins.
+- [x] Produce a comprehensive source and asset audit that enumerates every original source file, relevant asset, route, form, data model, and configuration artifact by module.
+- [x] Expand the archive documentation with exact naming conventions, module boundaries, full route maps, workflow descriptions, and verified business rules for every original XinUS surface and API endpoint.
+- [x] Enumerate every original source file explicitly in the archive audit, including each `src/components/ui/*` file and all attached reference assets/configuration artifacts by module.
+- [x] Expand the archive audit into a complete endpoint-by-endpoint API map covering auth, billing, credits, owner, terminal, health, and feature routes with exact paths, request/response contracts, and verified business rules.
+- [x] Add a per-module audit section that ties exact naming conventions, boundaries, forms, workflows, and data models to every XinUS surface without grouped omissions.
+- [x] Enumerate all remaining archive source areas, including crypto, shared client/schema/integration libraries, scripts, and every other source directory, in `archive-audit.md`.
+- [x] Correct and verify every API-audit contract against the inspected server source, including exact owner-terminal outcome values and error behavior.
+- [x] Expand the audit from module-level summaries to individual page and surface coverage for every XinUS application route.
+- [x] Normalize the owner-terminal audit with exact stored outcomes, accepted terminal-history filters, and their verified legacy mismatch.
+- [x] Add exact success and error response contracts to the remaining summarized API audit entries, especially owner-terminal and health routes.
+- [x] Add exact success and error response contracts for every remaining API endpoint in `archive-audit.md`.
+- [x] Recreate the original database schema in Drizzle and apply a dependency-safe MySQL migration.
+- [x] Rebuild every original server-side workflow as typed tRPC procedures without altering business behavior.
+- [x] Enforce Manus-authenticated protected routes and server-side authorization for all suite features.
+- [x] Implement the remaining original typed workflows for billing, credit ledger/history, owner audit/history, terminal commands, and full Wraith persona/Omni/intensity behavior.
+- [x] Restore the missing original business rules in the typed layer, including XC/quota/refund decisions, complete validation and error states, history behavior, and PD Pro transitions.
+- [x] Add and verify protected frontend routes, route guards, and dashboard navigation for every XinUS suite surface.
+- [x] Recreate the original dashboard information architecture and sidebar navigation using the supplied dashboard layout foundation where appropriate.
+- [x] Rebuild every original feature module, view, tool, and form discovered in the archive with matched names and workflows.
+- [x] Establish a polished, responsive XinUS design system with accessible color tokens, typography, spacing, component states, and motion preferences.
+- [x] Implement explicit loading, empty, error, and success states across data-dependent screens and actions.
+- [x] Verify desktop and mobile behavior, access controls, core workflows, and data handling with automated tests and browser-level checks.
+- [x] Update the application title and metadata from the temporary project name to XinUS Clarity Suite.
+- [x] Complete remaining original server-command parity, validation, history, and PD Pro transition behavior.
+- [x] Finish page-by-page reconstruction and navigation for every audited XinUS surface without generic substitutes.
+- [x] Add authenticated route and workflow verification with broader automated coverage.
+- [x] Add complete loading, empty, error, and success handling to every XinUS data-driven screen and mutation.
+- [x] Complete remaining original owner-terminal, history, validation, and PD Pro workflow fidelity.
+- [x] Replace remaining shared Recidivism substitutes with distinct audited module views and behaviors.
+- [x] Expand authenticated workflow tests beyond the existing protected-procedure regression coverage.
+- [x] Complete an app-by-app verification matrix with explicit loading, empty, success, error, persistence, and recovery evidence across all standalone apps.
+- [x] Complete remaining owner-terminal and PD Pro validation/history fidelity from the audited source workflows.
+- [x] Split remaining Recidivism surfaces into distinct page implementations with surface-specific behavior.
+- [x] Add signed-in server workflow tests and authenticated browser verification for protected XinUS routes.
+- [x] Complete the XinUS Clarity Suite metadata pass, including description and social-preview metadata.
+- [x] Produce a final implementation summary and save a verified project checkpoint.
+- [x] Fix the incorrect XinUS Clarity mode-allowance rejection and replace raw mutation failures with clear in-product guidance.
+- [x] Replace all remaining user-facing legacy product-name references with XinUS across application copy, metadata, and configuration.
+- [x] Replace remaining legacy product-name references in the archived project template metadata with XinUS.
+- [x] Verify the full repository contains no legacy product-name references outside the required managed filesystem path.
+- [x] Re-run the full repository naming audit after cleanup and confirm only the required managed filesystem path retains the legacy name.
+- [x] Define XinUS standalone product catalog, roles, payers, and entitlement rules, including free recovery-user access and payer-funded PD Pro access.
+- [x] Extend the XinUS Drizzle schema and typed server contracts for product entitlements, organization payer records, and shared intelligence context.
+- [x] Implement product-specific Stripe checkout and entitlement enforcement without charging recovery users for recovery-focused access.
+- [x] Build a unified XinUS product dashboard that shows users only their entitled standalone applications and provides appropriate access or purchase paths.
+- [x] Preserve and surface shared reflective-intelligence context across permitted XinUS products with user-scoped privacy boundaries.
+- [x] Run a real authenticated browser pass for checkout cancel/return and shared-context save/reload persistence.
+- [x] Diagnose and fix the XinUS invalid OAuth-state sign-in failure, including a clear user recovery path.
+- [x] Enforce standalone product access consistently across all server-side XinUS workflows.
+- [x] Improve standalone XinUS product onboarding, discovery, purchase guidance, and first-use empty states for everyday users.
+- [x] Add and test product-entitlement guards for GED Tutor, Hidden Gems, SitRep, and Wraith server workflows.
+- [x] Add automated product billing and entitlement tests covering Recovery claiming, organization-funded PD Pro metadata, and webhook synchronization.
+- [x] Add direct signed-in Recovery claim and organization-funded PD Pro checkout-metadata tests once the managed data boundary is available or safely mockable.
+- [x] Add first-use onboarding and explicit empty states inside every standalone XinUS app surface.
+- [x] Expand product-specific capabilities and user-friendly workflows while preserving shared reflective-intelligence context controls.
+- [x] Perform and document platform-wide authenticated browser checks for OAuth recovery, onboarding, standalone access, and responsive usability across all products.
+- [x] Add granular XinUS context-sharing settings so users can select the approved context fields and active products that may receive them.
+- [x] Add recent-app quick launch and a dark-mode toggle to My XinUS Apps.
+- [x] Add secure PD Pro case-summary PDF report generation and download for authorized public-defender users.
+- [x] Test context settings, recent-app launch, theming, and authorized PDF export flows.
+- [x] Add field-level reflective-context sharing preferences for North Star and working preferences, alongside product-level consent.
+- [x] Add targeted automated coverage for context persistence, quick launch, entitlement-gated access, and authorized PD Pro report exports.
+- [x] Run explicit browser verification for PD Pro PDF download and shared-context controls persistence.
+- [x] Expand XinUS Clarity with structured decision framing, commitments, reflection history, and next-step tracking.
+- [x] Expand XinUS GED Tutor with practice plans, skill tracking, review prompts, and session history.
+- [x] Expand XinUS Hidden Gems with collection records, appraisal comparison, confidence framing, and finding organization.
+- [x] Expand XinUS SitRep with decision checklists, response planning, saved assessments, and scenario comparison.
+- [x] Expand XinUS PD Pro with case planning, deadlines, tasks, report options, and professional workflow controls.
+- [x] Expand XinUS Recovery and Task Force with check-ins, support planning, subject views, risk signals, and operational follow-through.
+- [x] Expand XinUS Wraith with guidance modes, conversation continuity, action capture, and product-aware routing.
+- [x] Upgrade cross-app product navigation, shared context, first-use guidance, and responsive interaction patterns.
+- [x] Validate expanded XinUS workflows with automated tests and responsive browser checks.
+- [x] Verify the expanded GED Tutor, Hidden Gems, SitRep, and Recovery workflows at responsive browser breakpoints.
+- [x] Add direct workflow-level behavior coverage for GED Tutor, Hidden Gems, SitRep, and Recovery or Task Force follow-through flows.
+- [x] Add automated behavior coverage for expanded workboard progress, comparison, case-review, and check-in workflows.
+- [x] Implement persisted Clarity commitments and next-step tracking with a resilient local fallback.
+- [x] Implement GED study plans and skill-tracking records with a resilient local fallback.
+- [x] Implement Hidden Gems collection records and appraisal-comparison workspaces with a resilient local fallback.
+- [x] Implement SitRep decision checklists and scenario-comparison workspaces with a resilient local fallback.
+- [x] Implement persistent PD Pro task and deadline review, plus Recovery and Task Force check-ins and Wraith action capture.
+- [x] Add structured GED skill progress, collection-appraisal comparison, SitRep scenario comparison, and PD Pro task/deadline review interfaces.
+- [x] Activate the secure server-side product-work-record store once the managed database connection is available.
+- [x] Restore checkpoint synchronization and save the latest verified XinUS OAuth-validation refinement.
+- [x] Define and implement a XinUS-controlled private OAuth approach that no longer relies on the hosted Manus authentication provider.
+- [x] Add clear authentication loading, retry, and private sign-in failure states across XinUS entry points.
+- [x] Build a unified private user dashboard for GED Tutor, Hidden Gems, and Task Force status and recent activity.
+- [x] Add authenticated dashboard activity aggregation that keeps GED, appraisal, and Task Force data private to the signed-in user.
+- [x] Upgrade GED Tutor with adaptive learner context, personalized recommendations, engaging encouragement, and expert subject tutoring.
+- [x] Add GED Tutor research-aware fallback guidance for questions that need verified information beyond the current lesson context.
+- [x] Validate private authentication, dashboard privacy, recent activity, and adaptive GED Tutor behavior with a live private account after the managed database host reconnects.
+- [x] Implement a self-controlled XinUS OAuth issuer and application client flow, including secure authorization-code and PKCE support.
+- [x] Add a private XinUS account onboarding flow that can bootstrap the first administrator without the hosted provider.
+- [x] Add dashboard-level private recent-activity aggregation for GED Tutor, Hidden Gems, and Task Force Pro.
+- [x] Add structured AI study recommendations with learner goals, strengths, focus areas, teaching tone, confidence, and safe fallback guidance.
+- [x] Apply the private OAuth database migration (`drizzle/0008_lovely_may_parker.sql`) when the managed database host reconnects.
+- [x] Re-run the live Tavily credential test when external DNS connectivity to `api.tavily.com` is restored.
+- [x] Trace the existing uploaded Tavily credential and bind it to the Lightsail XinUS service environment without exposing its value.
+- [x] Create a zero-edit AWS Lightsail launch script that deploys the confirmed XinUS repository from its main branch.
+- [x] Validate and deliver the one-paste XinUS Lightsail launch script on a clean target.
+- [x] Execute the one-paste Lightsail script on a fresh Ubuntu host with GitHub access and record repository, build, systemd, and Nginx results.
+- [x] Inspect the deployed AWS Lightsail XinUS instance over SSH and report deployment health without exposing credentials.
+- [x] Repair the Lightsail cloud-init shell compatibility issue and rerun the XinUS bootstrap on the deployed instance.
+- [x] Transfer the current XinUS source directly to the approved Lightsail instance, build it, and verify the runtime services.
+- [x] Connect xinus.one to the deployed XinUS Lightsail instance and configure production HTTPS.
+- [x] Activate the Lightsail production database connection, apply pending private OAuth schema migration, and verify private account workflows.
+- [x] Provision a local-only MariaDB database on the Ireland Lightsail instance, configure XinUS securely, and migrate the production schema.
+- [x] Diagnose and repair the production private-account registration failure reported after database activation.
+- [x] Repair the live Core weekly-allowance gate that blocks the private XinUS administrator.
+- [x] Verify a live authenticated premium Clarity mode succeeds without a weekly-allowance error on the private deployment.
+- [x] Audit and validate the live text workflow for SitRep, PD Pro, Recovery, Task Force Pro, Wraith, and Core under the local model.
+- [x] Audit Hidden Gems, the only XinUS visual or structured-model workflow, against the local vision model capability and repair incompatible calls.
+- [x] Finish live app-by-app verification of product access, persistence, routing, and user-visible error states across all standalone applications.
+- [x] Diagnose and restore production reachability for xinus.one after the reported outage.
+- [x] Trace and repair the signed-in Transcend workflow that remains below the intended private XinUS behavior despite prior server smoke checks.
+- [x] Trace and repair the signed-in GED Tutor workflow before accepting it as production-ready.
+- [x] Simplify the XinUS assistant experience to a single visible PAM persona and remove extra persona choices.
+- [x] Render GED Tutor mathematics in learner-friendly notation instead of raw LaTeX symbols and delimiters.
+- [x] Verify live GED Tutor plain-math output and diagnose the signed-in Transcend experience against the latest deployed bundle.
+- [x] Rename the Wraith product identity, routes, navigation, workflow labels, and user-facing copy to PAM across XinUS.
+- [x] Migrate Wraith product keys and conversation kinds to PAM while preserving entitlement, context-sharing, subscription, and conversation data.
+- [x] Remove any remaining Rafe, Wraith, or non-PAM assistant labels from the side panel and all visible navigation surfaces, then verify the deployed UI.
+- [x] Sign into production and visually verify the authenticated side panel and PAM history show no Rafe, Wraith, Keira, or KIRA labels after the title migration.
+- [x] Complete authenticated browser verification of PD Pro Office, Recidivism protected subroutes, and the admin surface before closing broad protected-route coverage.
+- [x] Verify authenticated dynamic Recidivism subject and report routes with a real subject record before closing protected-route coverage.
+- [x] Replace the GED Tutor’s production OpenAI-key dependency with a supported server-side AI provider path and safe fallback.
+- [x] Perform a focused production readiness audit of Core, GED Tutor, and private-account workflows after the repairs.
+- [x] Add secure Hidden Gems controls for choosing an existing image or capturing a new one with the device camera, then validate image-analysis handoff and errors.
+- [x] Diagnose and repair the Hidden Gems uploaded-image appraisal failure reporting an unexpected-token response.
+- [x] Diagnose and repair the Hidden Gems storage response returning HTML where the private upload workflow expects JSON.
+- [x] Complete a full product, technical, accessibility, performance, conversion, and security upgrade audit with a prioritized XinUS roadmap.
+- [x] Implement Google discovery assets and technical SEO, including crawl directives, sitemap, canonical metadata, and structured data where appropriate.
+- [x] Audit XinUS AI architecture, local-model capabilities, and Amazon Bedrock readiness before any provider integration decision.
+- [x] Conduct a cross-category competitor and opportunity analysis covering reflective intelligence, adaptive learning, image appraisal, legal workflow, recovery, operations, and situational assessment.
+- [x] Implement a server-side provider policy with explicit Ollama default, Amazon Bedrock Runtime readiness, restricted-product consent boundaries, safe status reporting, and regression coverage.
+- [x] Repair the Hidden Gems storage integration so upstream HTML/non-JSON responses become private-storage fallbacks or clear recoverable app errors rather than parser failures.
+- [x] Apply a shared XinUS intelligence-outcome pattern that distinguishes user input, inference, uncertainty, next step, and human-review boundaries in upgraded workflows.
+- [x] Implement a first evidence-aware work-object upgrade for each standalone product: Decision Thread, Skill Loop, Appraisal Evidence Packet, Case Timeline, Support Plan Check-in, Follow-through Review, SitRep Decision Brief, and PAM Continuity Card.
+- [x] Establish and validate an AI assurance register, sensitive-product AI opt-outs, WCAG 2.2 AA checks, and non-sensitive quality telemetry for upgraded workflows.
+- [x] Define and implement a prioritized meta-upgrade program with measurable quality, usability, reliability, safety, and differentiation outcomes.
+- [x] Keep Amazon Bedrock disabled and retain local Ollama as the only active XinUS inference provider during this upgrade cycle.
+- [x] Configure the Lightsail private-storage fallback and verify Hidden Gems upload, image persistence, and clear recovery errors end to end.
+- [x] Add product-specific evidence-and-review guidance to Clarity, GED Tutor, Hidden Gems, PD Pro, Recovery, Task Force Pro, SitRep, and PAM without expanding cloud data sharing.
+- [x] Improve accessible loading, empty, error, success, focus, and retry states in the upgraded XinUS workflows.
+- [x] Remove the unresolved production analytics script placeholder that is preventing the authenticated XinUS browser application from mounting reliably.
+- [x] Run browser validation for paid checkout initiation and hosted-checkout cancellation/return paths, and confirm shared-context settings persist after save/reload. (No payment details were entered or submitted.)
+- [x] Replace the popup-prone asynchronous Stripe checkout handoff with reliable same-tab hosted checkout navigation and verify the non-payment return path.
+- [x] Surface recoverable hosted-checkout errors in My XinUS Apps and Account instead of leaving a failed billing handoff silent.
+- [x] Add and verify a non-secret AI provider readiness/status surface for the active local-only policy.
+- [x] Implement distinct named evidence-aware work objects for each XinUS standalone product and add direct UI/test coverage.
+- [x] Add sensitive-product AI opt-out controls and perform and document WCAG 2.2 AA validation.
+- [x] Add a XinUS AI assurance register and local-provider quality checks for the upgraded workflows.
+- [x] Build a shared AI streamline layer that transforms authorized intake into structured summary, priority, next action, follow-up, uncertainty, and required human-review signals.
+- [x] Add high-volume AI streamline workflows for Clarity, GED Tutor, Hidden Gems, PD Pro, Recovery, Task Force Pro, SitRep, and PAM with privacy-preserving local-model enforcement.
+- [x] Add a cross-product priority queue and daily briefing that consolidates user-authorized follow-through without exposing protected case or subject content across apps.
+- [x] Add a reusable AI review gate that requires a human confirmation before any consequential action, escalation, case update, or outreach recommendation is considered complete.
+- [x] Create exhaustive route-state, entitlement, persistence, and error-recovery verification coverage for all standalone applications.
+- [x] Document and verify end-to-end private account recovery and Hidden Gems camera/upload browser flows.
+- [x] Validate the one-paste Lightsail bootstrap on a clean Ubuntu host using reachable GitHub access and document the reproducible deployment result.

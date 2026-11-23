@@ -1,6 +1,8 @@
 import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import type { User } from "../../drizzle/schema";
-import { sdk } from "./sdk";
+import { ENV } from "./env";
+import { getOrCreateBetaUser } from "../db";
+import { authenticatePrivateRequest } from "../privateSession";
 
 export type TrpcContext = {
   req: CreateExpressContextOptions["req"];
@@ -13,11 +15,21 @@ export async function createContext(
 ): Promise<TrpcContext> {
   let user: User | null = null;
 
-  try {
-    user = await sdk.authenticateRequest(opts.req);
-  } catch (error) {
-    // Authentication is optional for public procedures.
-    user = null;
+  if (ENV.betaAuthBypass) {
+    try {
+      user = await getOrCreateBetaUser();
+    } catch (error) {
+      console.error("[Beta Auth] Could not provision beta identity", error);
+    }
+  }
+
+  if (!user) {
+    try {
+      user = await authenticatePrivateRequest(opts.req);
+    } catch (error) {
+      // Authentication is optional for public procedures.
+      user = null;
+    }
   }
 
   return {

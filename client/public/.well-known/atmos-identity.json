@@ -1,0 +1,19 @@
+{
+  "schema": "https://sri.manus.space/schemas/atmos-identity-v1.json",
+  "nodeId": "XINUS-CLARITY",
+  "canonicalName": "XINUS-CLARITY",
+  "canonicalLocus": "https://exonissuite-ceruhtwo.manus.space",
+  "logicalRegion": "Ireland",
+  "role": "XinUS Clarity Suite",
+  "manifestVersion": "1.0.0",
+  "publicKey": "MCowBQYDK2VwAyEAuVjs0jifCLjm2v6W5bLUXUJ1RLrM8rgVWhtD7RR3u84=",
+  "identityHash": "sha256:b8395b4ad7ba8dc631a912a4f4d4c36d30258feca11a8627c28e404da84ff695",
+  "issuedAt": "2026-10-09T01:30:39.393Z",
+  "expiresAt": "2027-10-09T01:30:39.393Z",
+  "signature": "No1BXzBIa9QdNXd8fNZZN9siLAg9qVq6t3fx/Zp0uyOLxrPyLFSR6VccT3HaPrdMoB6XCr8i1X7uChsoxphWCA==",
+  "format": "atmos-identity-manifest-v1",
+  "documentSha256": "sha256:b8395b4ad7ba8dc631a912a4f4d4c36d30258feca11a8627c28e404da84ff695",
+  "signatureAlgorithm": "Ed25519-canonical-json",
+  "privateKeyIncluded": false,
+  "verification": "SELF_VERIFIED_ONLY"
+}
